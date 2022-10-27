@@ -1,0 +1,58 @@
+﻿@model IEnumerable<LaserAfzar.Entities.SubService>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Sub Services Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { id = ViewBag.CompanyServiceId })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            Images
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @if (item.Description.Length >= 20)
+                {
+                    @Html.DisplayFor(modelItem => item.Description).ToString().Substring(0,20)@:...
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.Description)
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Index", "ServiceImages", new { id = item.SubServiceId, CompanyServiceId = ViewBag.CompanyServiceId }, null)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.SubServiceId, CompanyServiceId = ViewBag.CompanyServiceId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.SubServiceId, CompanyServiceId = ViewBag.CompanyServiceId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.SubServiceId, CompanyServiceId = ViewBag.CompanyServiceId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to Services", "Index", "CompanyServices")
+</div>
