@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="row"
+      style="background-image: url(/images/Site/LaserAfzar_Optics.jpeg)"
+      data-stellar-background-ratio="0.2">
+
+    <section class="seperate-pages-container"
+             ng-app="LaserAfzarServiceViewer"
+             ng-controller="ServiceViewerController"
+             ng-init="init()">
+
+        <!-- sending mvc url id to angularjs controller -->
+        <input type="hidden" id="serviceId" ng-model="serviceId" ng-init="serviceId=@ViewBag.serviceId" />
+
+        @*<pre>{{ServiceDetail | json}}</pre>*@
+        <article>
+            <section>
+                <h1>service title : {{ServiceDetail.Title}}</h1>
+                <p>service brief description : {{ServiceDetail.BriefDescription}}</p>
+
+                <img ng-src="/images/ServiceTitleImages/{{ServiceDetail.ServiceTitleImage.FileName}}"
+                     alt="{{ServiceDetail.ServiceTitleImage.Title}}"
+                     title="{{ServiceDetail.ServiceTitleImage.Title}}"
+                     class="img-responsive" />
+
+                <div class="full-description-paragraph-main" ng-bind-html="trustAsHtml(ServiceDetail.FullDescription)"></div>
+            </section>
+        </article>
+
+
+        <div ng-repeat="obj in ServiceDetail.SubServices">
+            <article>
+                <section>
+                    <h2>{{obj.Title}}</h2>
+                    <div class="full-description-paragraph" ng-bind-html="trustAsHtml(obj.Description)"></div>
+
+                    <div id="nanoGallery{{$index}}">
+
+                        @*<p><img ng-src="/images/ServiceImages/{{imageObj.FileName}}" /></p>
+                            <p>{{imageObj.FileName | split:'.':0}}_thumbnail.jpeg</p>*@
+
+                        @*<a href="/images/ServiceImages/{{imageObj.FileName}}"
+                            data-ngthumb="/images/ServiceImages/{{imageObj.FileName | split:'.':0}}_thumbnail.jpeg"
+                            data-ngdesc="{{imageObj.Title}}"
+                            ng-repeat="imageObj in obj.ServiceImage">{{imageObj.Title}}</a>*@
+
+                        <a href="/images/ServiceImages/{{imageObj.FileName}}"
+                           data-ngthumb="/images/ServiceImages/{{imageObj.FileName | split:'.':0}}_thumbnail.jpeg"
+                           data-ngdesc="{{imageObj.Title}}"
+                           ng-repeat="imageObj in obj.ServiceImage"
+                           my-next-repeat-directive>{{imageObj.Title}}</a>
+
+                    </div>
+                </section>
+            </article>
+        </div>
+
+    </section>
+
+    <section class="row contactInfo-portion">
+
+        @Html.Partial("_ContactUsPartial");
+
+    </section>
+
+</main>
+
+
+@section scripts{
+    <script src="~/Scripts/ServiceAngularJs.js"></script>
+
+    <script>
+        $(".navbar").addClass("navbarBackgroundFix");
+
+
+        $('.navbar-link-href').each(function () {
+                $(this).attr('href', "/" + $(this).attr('href'));            
+        });
+
+    </script>
+}
