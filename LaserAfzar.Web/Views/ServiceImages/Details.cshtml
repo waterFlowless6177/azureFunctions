@@ -1,0 +1,41 @@
+﻿@model LaserAfzar.Entities.ServiceImage
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+@Html.Partial("_DeleteImagePreview")
+
+<div>
+    <h4>ServiceImage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ServiceImageId, SubServiceId = ViewBag.SubServiceId, CompanyServiceId = @ViewBag.CompanyServiceId }) |
+    @Html.ActionLink("Back to List", "Index", new { id = ViewBag.SubServiceId , CompanyServiceId = @ViewBag.CompanyServiceId })
+</p>
+
+@section Scripts {
+    <link href="~/Content/AsyncUploadStyle.css" rel="stylesheet" />
+}
