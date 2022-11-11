@@ -1,0 +1,52 @@
+﻿@model LaserAfzar.Entities.ServiceImage
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+
+@Html.Partial("_DeleteImagePreview")
+
+<div>
+    <h4>ServiceImage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index", new { id = ViewBag.SubServiceID, CompanyServiceId = ViewBag.CompanyServiceID })
+        </div>
+
+        <input type="hidden" name="SubServiceId" id="SubServiceId" value="@ViewBag.SubServiceId" />
+        <input type="hidden" name="CompanyServiceId" id="CompanyServiceId" value="@ViewBag.CompanyServiceId" />
+        <input type="hidden" value="@Model.FileName" id="deleteFileName" name="deleteFileName" />
+    }
+</div>
+
+@section Scripts {
+    <link href="~/Content/AsyncUploadStyle.css" rel="stylesheet" />
+}
