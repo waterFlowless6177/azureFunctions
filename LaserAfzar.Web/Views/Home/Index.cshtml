@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "صنایع لیزری لیزرافزار";
+}
+
+
+<main ng-app="LaserAfzarViewer">
+
+    @* parallax stellar class stellar-bg *@
+    <section class="row welcome-screen stellar-bg"
+             style="background-image: url(/images/Site/LaserAfzar_welcome.jpg)"
+             data-stellar-background-ratio="0.2">
+        <div class="welcome-screen-start">
+            <h1>صنایع لیزری لیزرافزار</h1>
+            <h2>ارائه کننده پیشرفته ترین سیستم های لیزر صنعتی و آزمایشگاهی</h2>
+            <a href="#aboutus"><i class="fas fa-arrow-circle-down fa-7x"></i></a>
+        </div>
+    </section>
+
+
+    <section id="aboutus"
+             class="row about-portion"
+             ng-controller="AboutController">
+        <div ng-repeat="obj in AboutUsArray">
+            <div ng-bind-html="trustAsHtml(obj.Description)"></div>
+        </div>
+    </section>
+
+    <section class="row features-portion"
+             ng-controller="FeatureController">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 feature-item wow"
+                     ng-class="{'fadeInLeft' : $index == 0, 'fadeInDown' : $index == 1, 'fadeInRight' : $index == 2}"
+                     ng-repeat="obj in FeturesArray">
+                    <i class="{{obj.Icon}} fa-7x feature-icon-differ{{$index}}"></i>
+                    <div class="feature-description feature-des-differ{{$index}}">
+                        <h2>{{obj.Title}}</h2>
+                        <p>{{obj.Description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services"
+             class="row services-portion stellar-bg"
+             style="background-image: url(/images/Site/LaserAfzar_Optics.jpeg)"
+             data-stellar-background-ratio="0.2">
+        <div class="container"
+             ng-controller="ServiceController">
+            <div class="row row-eq-height"
+                 ng-repeat="obj in ServiceArray">
+                <div class="col-sm-6 service-main-image{{$index%2}}">
+                    <img ng-src="/Images/ServiceTitleImages/{{obj.ServiceTitleImage.FileName}}" />
+                    <a class="serviceLinkOverlay"
+                       href="/services/details/{{obj.CompanyServiceId}}?serviceTitle={{obj.Title}}">
+
+                        <i class="fa fa-link"></i>
+
+                    </a>
+                </div>
+                <div class="col-sm-6 service-description{{$index%2}}">
+                    <h2>{{obj.Title}}</h2>
+                    <p>{{obj.BriefDescription}}</p>
+                    <div class="service-link">
+                        <a href="/services/details/{{obj.CompanyServiceId}}?serviceTitle={{obj.Title}}" class="badge">بیشتر بدانید</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section id="contactus"
+             class="row contactInfo-portion">
+
+        @Html.Partial("_ContactUsPartial");
+
+    </section>
+
+
+    <section class="row members-portion"
+             ng-controller="MemberController">
+
+        <div id="carousel-members" class="carousel slide" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner member-carousel-inner" role="listbox">
+
+                <div class="item"
+                     ng-repeat="obj in MemberArray"
+                     ng-class="{active:!$index}">
+                    @* marking the first class as active otherwise carousel won't be able to work *@
+                    <img ng-src="~/images/MemberImages/{{obj.CompanyMemberImage.FileName}}"
+                         class="img-circle"
+                         alt="" />
+                    <p>{{obj.Name}}</p>
+                    <p>{{obj.JobTitle}}</p>
+                    <p>{{obj.Message}}</p>
+                    <a class="btn badge" href="ContactURL" target="_blank">Contact</a>
+                </div>
+
+
+            </div>
+            <!-- Controls -->
+        </div>
+
+    </section>
+
+</main>
+
+
+
+@section scripts{
+
+
+    <script src="~/Scripts/HomeAngularJs.js"></script>
+
+}
