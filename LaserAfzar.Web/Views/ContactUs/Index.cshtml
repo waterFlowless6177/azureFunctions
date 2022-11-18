@@ -1,0 +1,91 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<LaserAfzar.Entities.ContactUs>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var trClass = "";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="pagedList" data-laserafzar-target="#contactMessages">
+    @Html.PagedListPager(Model, page => Url.Action("index", new { page }),
+    PagedListRenderOptions.ClassicPlusFirstAndLast)
+</div>
+
+
+<table class="table">
+    <tr>
+        <th>
+            <label>Name</label>
+        </th>
+        <th>
+            <label>Email</label>
+        </th>
+        <th>
+            <label>Tel</label>
+        </th>
+        <th>
+            <label>Message</label>
+        </th>
+        <th>
+            <label>Time</label>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    if (item.Read)
+    {
+        trClass = "TRMessageRead";
+    }
+    else
+    {
+        trClass = "TRMessageNotRead";
+    }
+    <tr class="@trClass">
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tel)
+        </td>
+        <td>
+            @if (item.Message.Length >= 20)
+                {
+                @item.Message.Substring(0, 20);@:...
+                }
+                else
+                {
+                @Html.DisplayFor(modelItem => item.Message)
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubmitDateTime)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ContactUsId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ContactUsId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ContactUsId })
+        </td>
+    </tr>
+}
+
+</table>
+
+<hr />
+
+<div class="pagedList" data-laserafzar-target="#contactMessages">
+    @Html.PagedListPager(Model, page => Url.Action("index", new { page }),
+    PagedListRenderOptions.ClassicPlusFirstAndLast)
+</div>
+
