@@ -1,0 +1,91 @@
+﻿@model IEnumerable<LaserAfzar.Entities.CompanyService>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BriefDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullDescription)
+        </th>
+        <th>
+            Sub Services
+        </th>
+        <th>
+            Main Image
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @if (item.BriefDescription.Length >= 20)
+                {
+                    @Html.DisplayFor(modelItem => item.BriefDescription).ToString().Substring(0, 20)@:...
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.BriefDescription)
+                }
+
+            </td>
+            <td>
+                @if (item.FullDescription.Length >= 20)
+                {
+                    @Html.DisplayFor(modelItem => item.FullDescription).ToString().Substring(0, 20)@:...
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.FullDescription)
+                }
+            </td>
+            <td>
+
+                @Html.ActionLink("Edit", "Index", "SubServices", new { id = item.CompanyServiceId }, null)
+
+            </td>
+            <td>
+
+
+                @if (item.ServiceTitleImage != null)
+                {
+                    <span class="linkDisabled">Create</span> @: |
+                    @Html.ActionLink("Edit", "Edit", "ServiceTitleImages", new { id = item.CompanyServiceId }, null) @: |
+                    @Html.ActionLink("Delete", "Delete", "ServiceTitleImages", new { id = item.CompanyServiceId }, null)
+                }
+                else
+                {
+                    @Html.ActionLink("Create", "Create", "ServiceTitleImages", new { id = item.CompanyServiceId }, null) @: |
+                    <span class="linkDisabled">Edit</span> @: |
+                    <span class="linkDisabled">Delete</span>
+                }
+
+
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CompanyServiceId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CompanyServiceId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CompanyServiceId })
+            </td>
+        </tr>
+    }
+
+</table>
