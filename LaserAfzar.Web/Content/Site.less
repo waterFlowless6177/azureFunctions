@@ -1,0 +1,539 @@
+﻿@import "mixins.less";
+
+@font-face {
+    .font-face('IRANSansWeb','/fonts/IRANSansWeb', normal);
+}
+
+@font-face {
+    .font-face('IRANSansWeb','/fonts/IRANSansWeb_Bold', bold);
+}
+
+@font-face {
+    .font-face('IRANSansWeb','/fonts/IRANSansWeb_Light', 300);
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: @fontFamilies;
+}
+
+html, body, main {
+    min-height: @fullsize;
+    height: @fullsize;
+}
+
+
+
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: @fullsize - (2 * @formElementMargin);
+    width: @fullsize - (2 * @formElementMargin);
+    margin-right: @formElementMargin;
+    margin-left: @formElementMargin;
+}
+
+.navbar {
+    .navBarBefore();
+    .itemTransition(all, 0.5s);
+}
+
+.navbar-collapse {
+    direction: @siteDirection;
+}
+
+.cbp-af-header-shrink {
+    .navBarAfter();
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    font-weight: @navbarFontWeight;
+    font-size: @navbarFontSize;
+    margin: @navbarLinkMargins;
+    color: @navbarLinkDefaultColor;
+
+    &:hover {
+        color: @navbarHoverColor;
+    }
+}
+
+@media (min-width: @smSize) {
+    .navbar-nav > li {
+        float: right;
+    }
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+    color: @mainColor;
+    background-color: @navbarBeforeBackgroundColor;
+}
+
+.navbar-inverse .navbar-nav > li > a:focus {
+    color: @navbarLinkDefaultColor;
+}
+
+
+/*navbar logo image issue at some resolutions*/
+@media (max-width:405px) {
+    .navbar-header {
+        position: relative;
+    }
+
+    .navbar {
+        img {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 70%;
+        }
+    }
+}
+
+.row {
+    margin: @bootstrapRowMargin;
+}
+
+.welcome-screen {
+    position: relative;
+    text-align: center;
+    .screen-background();
+}
+
+.welcome-screen-start {
+    position: absolute;
+    padding: 20px;
+    .verticallyAlignMiddle();
+
+    h1 {
+        color: white;
+        font-weight: bold;
+    }
+
+    h2 {
+        color: @firstColor;
+    }
+
+    a {
+        color: fade(@thirdColor,80);
+
+        &:hover {
+            color: fade(@firstColor,70);
+        }
+    }
+}
+
+@media(max-height:450px) {
+    .welcome-screen-start {
+        a {
+            font-size: @welcomeScreenFontSizeSmallSizesFix;
+        }
+    }
+}
+
+@media(max-width:@smSize) {
+    .welcome-screen-start {
+        a {
+            font-size: @welcomeScreenFontSizeSmallSizesFix;
+        }
+    }
+}
+
+
+/*About Portion*/
+.about-portion {
+    direction: @siteDirection;
+    background-color: @mainColor;
+    padding: 20px;
+    text-align: center;
+    color: white;
+
+    ol {
+        list-style-position: inside;
+
+        li {
+            font-family: @fontFamilies;
+        }
+    }
+}
+
+
+/*Features Portion*/
+.features-portion {
+    padding: @featurePortionPadding;
+}
+
+.feature-item {
+    text-align: center;
+
+    i {
+        display: block;
+        margin: @featureItemPadding;
+    }
+}
+
+.feature-description {
+    margin: @fearuesDescriptionBoxing;
+    padding: @fearuesDescriptionBoxing;
+}
+
+.feature-des-differ0 {
+    background-color: fade(@firstColor,70);
+}
+
+.feature-icon-differ0 {
+    color: @firstColor;
+}
+
+.feature-des-differ1 {
+    background-color: fade(@secondColor,70);
+}
+
+.feature-icon-differ1 {
+    color: @secondColor;
+}
+
+.feature-des-differ2 {
+    background-color: fade(@thirdColor, 70);
+}
+
+.feature-icon-differ2 {
+    color: @thirdColor;
+}
+
+
+/*services portion*/
+.services-portion {
+    background-color: @servicesPortionBackgroundColor;
+    padding: @servicesPortionPadding;
+
+    img {
+        width: @fullsize;
+    }
+}
+
+.service-main-image0 {
+    .ServiceMainImageUnion();
+    order: 2;
+}
+
+.service-main-image1 {
+    .ServiceMainImageUnion();
+    order: 1;
+}
+
+.service-description0, .service-description1 {
+    direction: @siteDirection;
+    padding: @serviceDescriptionPadding;
+    order: 1;
+    text-align: center;
+    position: relative;
+    background-color: white;
+
+    p {
+        color: gray;
+    }
+
+    .service-link {
+        .positionAbsoluteHorizontalCentering();
+        position: absolute;
+        bottom: 30px;
+
+        a.badge {
+            .badgeStyler();
+            background-color: @thirdColor;
+
+            &:hover {
+                color: @secondColor;
+            }
+        }
+    }
+}
+
+.service-description1 {
+    order: 2;
+}
+
+@media(max-width:@smSize) {
+    .service-main-image0 {
+        float: none;
+    }
+}
+
+/*service xs size styling*/
+@media(max-width:@smSize) {
+    .service-description0, .service-description1 {
+        .service-link {
+            position: static;
+        }
+    }
+}
+
+.serviceLinkOverlay {
+    .makeItOverlay();
+    text-align: center;
+    background-color: fade(black,50);
+    opacity: 0.0;
+    z-index: 99;
+
+    &:hover {
+        .itemTransition(all, 0.2s, ease-in-out);
+        opacity: 1.0;
+    }
+
+    i {
+        .itemTransition(all, 0.2s, ease-in-out);
+        width: 80px;
+        height: 80px;
+        border: 1px solid white;
+        .roundingByRadius();
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -40px 0 0 -40px;
+        font-size: 32px;
+        line-height: 80px;
+
+        &:hover {
+            background-color: fade(@mainColor, 60);
+        }
+    }
+}
+
+
+
+
+/*Contact info*/
+.contactInfo-portion {
+    background-color: @secondColor;
+    padding: @contactInfoPortionPadding;
+
+    address {
+        display: inline;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+        cursor: pointer;
+
+        &:hover {
+            color: @mainColor;
+        }
+    }
+}
+
+.contactinfo-icon {
+    padding: 0;
+    height: @contactInfoPartsHeight;
+    float: right;
+}
+
+.contactinfo-desc {
+    font-size: @mainFontSize;
+    height: @contactInfoPartsHeight;
+    float: left;
+    padding-top: 30px;
+}
+
+
+@media(max-width:@smSize) {
+    .contactinfo-icon, .contactinfo-desc {
+        text-align: center;
+        min-height: @contactInfoPartsHeightSmall;
+        height: auto;
+    }
+}
+
+@media(min-width:@smSize) {
+    .contactinfo-icon {
+        text-align: left;
+        height: @contactInfoPartsHeight;
+    }
+
+    .contactinfo-desc {
+        text-align: right;
+        height: @contactInfoPartsHeight;
+    }
+}
+
+
+/*Members*/
+.members-portion {
+    background-color: @memberPortionBackgroundColor;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: @mainFontSize - 2;
+
+    a.badge {
+        .badgeStyler();
+        color: white;
+        background-color: @memberContactBadgeBackground;
+
+        &:hover {
+            color: @memberContactBadgeHover;
+        }
+    }
+}
+
+.member-carousel-inner {
+    .item {
+        img {
+            height: @memberProfilePhotoHeight;
+            display: inline;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+footer {
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+
+    p {
+        margin-bottom: 0;
+    }
+}
+
+
+/*in result of header transparent background*/
+.navbarBackgroundFix {
+    background-color: @navbarAfterBackgroundColor;
+}
+
+
+/*Service Details*/
+.seperate-pages-container {
+    padding-top: 110px;
+    direction: @siteDirection;
+    background-color: fade(black,55);
+    text-align: center;
+    color: white;
+
+    h1 {
+        text-align: center;
+        margin-top: 0;
+        padding: @headersBlockPaddings;
+        background-color: fade(@firstColor,40);
+    }
+
+    h2 {
+        margin: 0;
+        padding: @headersBlockPaddings;
+        background-color: fade(@thirdColor,40);
+    }
+
+    p {
+        .ServiceDetailParagraphs();
+    }
+
+    .img-responsive {
+        .horizontallyCenterAlign();
+    }
+}
+
+.full-description-paragraph-main {
+    .ServiceDetailParagraphs();
+    background-color: fade(black, 60);
+
+    p {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.full-description-paragraph {
+    .ServiceDetailParagraphs();
+    background-color: white;
+    margin-bottom: @headersBlockPaddings + 10;
+
+    p {
+        color: black;
+    }
+}
+
+
+/*contactUsUser*/
+.contact-us-full {
+    height: 95vh;
+    position: relative;
+}
+
+.form-horizontal .form-group {
+    margin-right: 0px;
+    margin-left: 0px;
+
+    span {
+        font-size: @mainFontSize - 2;
+        font-weight: bold;
+    }
+}
+
+#contactus-response-success {
+    .makeItOverlay();
+}
+
+#reply-portion {
+    .centerChildInsideParent();
+    text-align: center;
+
+    p {
+        text-align: center;
+    }
+}
+
+
+@media (min-width: @smSize) {
+    .form-horizontal .control-label {
+        text-align: left;
+    }
+}
+
+
+
+
+/*bootstrap carousel fix*/
+
+/*making the welcome screen 100 percent of the window by css3*/
+.welcome-screen {
+    height: 100vh;
+}
+
+#aboutus {
+    min-height: 300px;
+    height: auto;
+}
+
+.features-portion {
+    min-height: 500px;
+    height: auto;
+}
+
+#services {
+    min-height: 800px;
+    height: auto;
+}
+
+#contactus {
+    min-height: 300px;
+    height: auto;
+}
+/*bootstrap carousel fix end*/
+
+
+/* element show on visibility */
+.wow {
+    visibility: hidden;
+}
