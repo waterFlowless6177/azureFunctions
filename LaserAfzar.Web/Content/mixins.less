@@ -1,0 +1,104 @@
+﻿@import "parameters.less";
+@import "NavbarParameters.less";
+
+.font-face(@font-family, @filepath, @font-weight) {
+    font-family: @font-family;
+    src: url('@{filepath}.eot');
+    src: url('@{filepath}.eot?#iefix') format('embedded-opentype'), url('@{filepath}.woff') format('woff'), url('@{filepath}.ttf') format('truetype');
+    font-weight: @font-weight;
+}
+
+.screen-background() {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.itemTransition(@item, @duration, @effect) {
+    -webkit-transition: @item @duration @effect;
+    -o-transition: @item @duration @effect;
+    transition: @item @duration @effect;
+}
+
+.itemTransition(@item, @duration) {
+    -webkit-transition: @item @duration;
+    -o-transition: @item @duration;
+    transition: @item @duration;
+}
+
+.navBarBefore() {
+    margin-bottom: @navbarBeforeMarginBottom;
+    padding: @navbarBeforePaddings;
+    background-color: @navbarBeforeBackgroundColor;
+    border: @navbarBeforeBorder;
+}
+
+.navBarAfter() {
+    padding: @navbarAfterPaddings;
+    opacity: @navbarAfterOpacity;
+    background-color: @navbarAfterBackgroundColor;
+    border: @navbarAfterBorder;
+}
+
+.verticallyAlignMiddle() {
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+.badgeStyler() {
+    border: none;
+    border-radius: 300px;
+    padding: 1rem 2rem;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.positionAbsoluteHorizontalCentering() {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+
+.horizontallyCenterAlign() {
+    display: block;
+    margin: 0px auto;
+}
+
+.roundingByRadius() {
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+}
+
+.centerChildInsideParent() {
+    position: relative;
+    top: 50%;
+    transform: translateY(-70%);
+}
+
+.makeItOverlay() {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+}
+
+
+//unions
+.ServiceMainImageUnion() {
+    padding: 0px;
+    position: relative;
+}
+
+.ServiceDetailParagraphs() {
+    text-align: right;
+    padding: @headersBlockPaddings + 5;
+    color: darken(white,15);
+    font-size: @mainFontSize - 4;
+    margin: 0;
+}
